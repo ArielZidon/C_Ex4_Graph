@@ -1,68 +1,70 @@
 #include <stdio.h>
+#include <ctype.h>
 #include <stdlib.h>
 #include "graph.h"
 
 int main()
 {
-    char choice;
-    int num_of_nodes;
-    node *graph = NULL;
-    int ID = 0;
+    pnode temp = NULL;
+    pnode *head = &temp;
+    char choise;
+    char ch;
+    int v = 0;
+    int src = 0;
 
-    while(TRUE)
+    while (scanf("%c", &choise) != EOF)
     {
-        scanf("%c",&choice);
 
-        if(choice == 'A')
+    
+        if(choise == 'A')
         {
-            scanf("%d",&num_of_nodes);
-            graph = creat_graph(num_of_nodes);
-        }
-
-        if(choice == 'p')
-        {
-            print_graph(graph);
-        }
-
-        if(choice == 'n')
-        {   
-            int dest = 0;
-            float V =0;
-            scanf("%d",&ID);
-            scanf("%d",&dest);
-            scanf("%f",&V);
-            node *p = graph;
-            while(p->next!=NULL){
-                if(p->id ==ID)
+            scanf("%d", &v);
+            *head =  creat_graph(v);
+            
+            scanf("%c", &ch);
+            
+            while(scanf("%c", &ch)!=0){
+                if(ch == 'n')
                 {
-                    if(p->My_edges!=NULL)
-                    {
-                        edge *y = NULL;
-                        y = p->My_edges;
-
-                        while(y->next_edge != NULL){
-                            y=y->next_edge;
-                        }
-                        y->next_edge = (edge*)malloc(sizeof(edge));
-                        y->next_edge->val = V;
-                        node to = coneected(dest,graph);
-                        y->next_edge->connect_to = &to;
-                        break;
-                
-                    }
-
-                    else
-                    {
-                        p->My_edges = (edge*)malloc(sizeof(edge));
-                        p->My_edges->val = V;
-                        node to = coneected(dest,graph);
-                         p->My_edges->connect_to = &to;
-                        break;
-                    }
+                scanf("%d",&src);
+                add_adge(head,src);
                 }
-                p = p->next;
+                else
+                {
+                    break;
+                }
             }
+            print_graph(*head);
+            
+                choise = ch;
+            
+            
+            // print_graph(*head);
         }
+        if(choise == 'B')
+        {
+            // insert_node_cmd(head);
+            printf("rrr");
+        }
+        if(choise == 'D')
+        {
+            // delete_node_cmd(head);
+        }
+        if(choise == 'S')
+        {
+            // shortsPath_cmd(*head);
+        }
+        if(choise == 'T')
+        {
+            // TSP_cmd(*head);
+        }
+       
+        else
+        {
+            break;
+        }
+    
     }
+
 }
 
