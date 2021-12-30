@@ -11,6 +11,7 @@ int main()
     char ch;
     int v = 0;
     int src = 0;
+    int press_A = 0;
 
     while (scanf("%c", &choise) != EOF)
     {
@@ -18,6 +19,7 @@ int main()
     
         if(choise == 'A')
         {
+            freeGraph(head);
             scanf("%d", &v);
             *head =  creat_graph(v);
             
@@ -36,19 +38,20 @@ int main()
             }
             print_graph(*head);
             
-                choise = ch;
-            
-            
-            // print_graph(*head);
+            choise = ch;
         }
+
         if(choise == 'B')
         {
-            // insert_node_cmd(head);
-            printf("rrr");
+            add_node(head);
+            print_graph(*head);
+            continue;
         }
         if(choise == 'D')
         {
-            // delete_node_cmd(head);
+            del_node(head);
+            print_graph(*head);
+            continue;
         }
         if(choise == 'S')
         {
@@ -65,6 +68,6 @@ int main()
         }
     
     }
-
+    freeGraph(head);
 }
 

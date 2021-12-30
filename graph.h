@@ -16,14 +16,12 @@ typedef struct GRAPH_NODE_ {
     struct GRAPH_NODE_ *next;
 } node, *pnode;
 
-void build_graph_cmd(pnode *head,int v);
-void insert_node_cmd(pnode *head);
-void delete_node_cmd(pnode *head);
-void print_graph(pnode head); //for self debug
-void deleteGraph_cmd(pnode* head);
+
+
 void shortsPath_cmd(pnode head);
 void TSP_cmd(pnode head);
 
+////////////////////////////////////////////
 node* creat_graph(int num_of_nodes);
 
 void add_adge(pnode *head,int src);
@@ -31,6 +29,17 @@ void add_adge(pnode *head,int src);
 void insert_edge(pnode temp,int dest,int w,pnode *head);
 
 pnode getNode(int id, pnode *head);
+
+void freeGraph(pnode *head);
+
+void print_graph(pnode head);
+
+void del_node(pnode *head);
+
+void free_edges(pnode p);
+
+void add_node(pnode *head);
+ 
 
 #endif
 
