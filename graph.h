@@ -39,6 +39,8 @@ void del_node(pnode *head);
 void free_edges(pnode p);
 
 void add_node(pnode *head);
+
+void del_edge(pnode *head,int n);
  
 
 #endif

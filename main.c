@@ -56,16 +56,14 @@ int main()
         if(choise == 'S')
         {
             // shortsPath_cmd(*head);
+            continue;
         }
         if(choise == 'T')
         {
             // TSP_cmd(*head);
+            continue;
         }
        
-        else
-        {
-            break;
-        }
     
     }
     freeGraph(head);
