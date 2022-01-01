@@ -80,7 +80,6 @@ void add_adge(pnode *head,int src){
         break;
         }
         insert_edge(temp,dest,w,head);
-        printf("%d",temp->edges->weight);
     }
 }
 
@@ -97,7 +96,6 @@ void insert_edge(pnode temp,int dest,int w,pnode *head){
         temp->edges->next =NULL;
         node *D = getNode(dest,head);
         temp->edges->endpoint = &(*D);
-        printf("if");
     }
     else{
         pedge n = temp->edges;
@@ -115,7 +113,6 @@ void insert_edge(pnode temp,int dest,int w,pnode *head){
         n->next->weight = w;
         node *D = getNode(dest,head);
         n->next->endpoint = &(*D);
-        printf("else");
     }
 }
 
@@ -246,7 +243,7 @@ void del_edge(pnode *head,int n)
 void add_node(pnode *head){
     int src;
     scanf("%d", &src);
-    printf("src: %d\n", src);
+    // printf("src: %d\n", src);
     int dest;
     int count = 0;
     int w;
@@ -261,7 +258,6 @@ void add_node(pnode *head){
         newNode->edges = NULL;
         newNode->next = NULL;
         inGraph->next = newNode;
-        printf("enter dest and weight");
         while (scanf("%d",&dest)!=0 && scanf("%d",&w)!=0){
             if((dest >= 'A' && dest <= 'Z') || (w >= 'A' && w <= 'Z'))
             {
@@ -277,7 +273,6 @@ void add_node(pnode *head){
         free_edges(temp);
         pedge tempEdge = temp->edges;
         temp->edges = NULL;
-        printf("enter dest and weight");
         while (scanf("%d",&dest)!=0 && scanf("%d",&w)!=0){
             if((dest >= 'A' && dest <= 'Z') || (w >= 'A' && w <= 'Z'))
             {
