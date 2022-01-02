@@ -11,7 +11,6 @@ int main()
     char ch;
     int v = 0;
     int src = 0;
-    int press_A = 0;
 
     while (scanf("%c", &choise) != EOF)
     {
@@ -54,6 +53,7 @@ int main()
         }
         if(choise == 'S')
         {
+            // shortsPath(*head);
             int src = -1, dest = -1;
             scanf("%d %d", &src, &dest);
             int dis = shortest_Path(*head, src, dest);

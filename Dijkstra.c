@@ -43,7 +43,8 @@ pdijkstra min(pdijkstra head)
         }
         head = head->next;
     }
-    if (Node != NULL) {
+    if (Node != NULL) 
+    {
         Node->tag = 1;
     }
     return Node;
@@ -80,6 +81,7 @@ pdijkstra RunDijkstra(pnode open, int src)
 }
 
 ////////////////////SHORTEST PASH/////////////////
+
 int shortest_Path(pnode head, int src, int dest) 
 {
     pdijkstra dijkstraHead = RunDijkstra(head, src);
@@ -133,15 +135,18 @@ void swap(int* arr, int i, int j)
 void PermotitionOfArr(int* arr, int arrLength)
 {
     int tempWeight = 0;
-    for (int i = 0; i < arrLength-1; ++i) {
+    for (int i = 0; i < arrLength-1; ++i) 
+    {
         int D = shortest_Path(graph,arr[i], arr[i+1]);
-        if (D == -1){
+        if (D == -1)
+        {
             tempWeight = INFINITY;
             return;
         }
         tempWeight += D;
     }
-    if (tempWeight < weight){
+    if (tempWeight < weight)
+    {
         weight = tempWeight;
     }
 }
@@ -160,12 +165,14 @@ void permotion( int start ,int* arr, int arrLength){
     }
 }
 
-int TSP(pnode head){
+int TSP(pnode head)
+{
     weight = INFINITY;
 	arrlenth = -1;
     graph = head;
     scanf("%d", &arrlenth);
     int *arr = (int *) (calloc(arrlenth, sizeof(int)));
+    
     for (int i = 0; i < arrlenth; i++) {
         scanf("%d", &arr[i]);
     }

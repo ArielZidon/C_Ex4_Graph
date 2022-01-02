@@ -29,7 +29,7 @@ node * creat_graph(int num_of_nodes)
 
         if(newNode == NULL)
         {
-            printf("Unable to allocate memory.");
+            // printf("Unable to allocate memory.");
             break;
         }
         newNode->id = i; 
@@ -66,7 +66,7 @@ void insert_node_cmd(pnode *head);
 void add_adge(pnode *head,int src){
 
     int dest;
-    int count = 0;
+    // int count = 0;
     int w;
     pnode temp = getNode(src,head);
     while(scanf("%d",&dest)!=0 && scanf("%d",&w)!=0)
@@ -245,7 +245,7 @@ void add_node(pnode *head){
     scanf("%d", &src);
     // printf("src: %d\n", src);
     int dest;
-    int count = 0;
+    // int count = 0;
     int w;
     pnode temp = getNode(src,head);
     if(temp == NULL){
@@ -271,7 +271,7 @@ void add_node(pnode *head){
         }
     } else{
         free_edges(temp);
-        pedge tempEdge = temp->edges;
+        // pedge tempEdge = temp->edges;
         temp->edges = NULL;
         while (scanf("%d",&dest)!=0 && scanf("%d",&w)!=0){
             if((dest >= 'A' && dest <= 'Z') || (w >= 'A' && w <= 'Z'))
