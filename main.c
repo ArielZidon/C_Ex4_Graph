@@ -57,13 +57,13 @@ int main()
             int src = -1, dest = -1;
             scanf("%d %d", &src, &dest);
             int dis = shortest_Path(*head, src, dest);
-            printf("Dijsktra shortest path: %d\n",dis);
+            printf("Dijsktra shortest path:%d\n",dis);
             continue;
         }
         if(choise == 'T')
         {
             int tsp = TSP(*head);
-            printf("TSP shortest path: %d\n",tsp);
+            printf("TSP shortest path:%d\n",tsp);
             continue;
         }
        
