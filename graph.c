@@ -29,7 +29,7 @@ node * creat_graph(int num_of_nodes)
 
         if(newNode == NULL)
         {
-            printf("Unable to allocate memory.");
+            // printf("Unable to allocate memory.");
             break;
         }
         newNode->id = i; 
@@ -126,7 +126,7 @@ void print_graph(pnode head){// for self debug
         pedge tempEdge = tempNode->edges;
         while (tempEdge != NULL)
         {
-            printf("dest: %d weight: %d ", tempEdge->endpoint->id,tempEdge->weight);
+            // printf("dest: %d weight: %d ", tempEdge->endpoint->id,tempEdge->weight);
             tempEdge = tempEdge->next;
         }
         printf("}");
