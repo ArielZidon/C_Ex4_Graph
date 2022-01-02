@@ -188,13 +188,16 @@ void free_edges(pnode p)
     {
     pedge temp = p->edges;
 
-    while(temp->next!=NULL)
+    while(temp!=NULL)
     {
         pedge p1 = NULL;
         p1 = temp;
         temp = temp->next;
         free(p1);
     }
+    }
+    else{
+        free(p->edges);
     }
 }
 
@@ -243,9 +246,7 @@ void del_edge(pnode *head,int n)
 void add_node(pnode *head){
     int src;
     scanf("%d", &src);
-    // printf("src: %d\n", src);
     int dest;
-    // int count = 0;
     int w;
     pnode temp = getNode(src,head);
     if(temp == NULL){
