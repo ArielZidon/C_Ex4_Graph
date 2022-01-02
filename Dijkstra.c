@@ -6,103 +6,135 @@ int weight;
 int arrlenth;
 pnode graph;
 
-pdijkstra buildDijkstra(pnode start, int src) {
-    pdijkstra head = NULL;
-    pdijkstra *index = &head;
-    while (start != NULL) {
-        (*index) = (pdijkstra) malloc(sizeof(dijkstra));
-        if ((*index) == NULL) {
-            exit(0);
+////////////Dijkstra/////////////
+
+pdijkstra use_Dijkstra(pdijkstra head, int id) 
+{
+    while (head != NULL) 
+    {
+        if (head->node->id == id) {
+            return head;
         }
 
-        (*index)->node = start;
-        if (start->id == src) {
-            (*index)->weight = 0;
-        } else {
-            (*index)->weight = INFINITY;
-        }
-        (*index)->tag = 0;
-        (*index)->next = NULL;
-        index = &((*index)->next);
-        start = start->next;
+        head = head->next;
     }
-    return head;
+    return NULL;
 }
 
-void deletateDijkstra(pdijkstra dijkstra) {
-    while (dijkstra != NULL) {
+void del_Dijk(pdijkstra dijkstra) 
+{
+    while (dijkstra != NULL)
+    {
         pdijkstra temp = dijkstra;
         dijkstra = dijkstra->next;
         free(temp);
     }
 }
 
-pdijkstra getPdijkstra(pdijkstra head, int id) {
-    while (head != NULL) {
-        if (head->node->id == id) {
-            return head;
+pdijkstra min(pdijkstra head) 
+{
+    pdijkstra Node = NULL;
+
+    while (head != NULL) 
+    {
+        if (!head->tag && head->weight < INFINITY && (Node == NULL || Node->weight < head->weight)) 
+        {
+            Node = head;
         }
         head = head->next;
     }
-    return NULL;
+    if (Node != NULL) {
+        Node->tag = 1;
+    }
+    return Node;
 }
 
-pdijkstra minVertical(pdijkstra head) {
-    pdijkstra ver = NULL;
-    while (head != NULL) {
-        if (!head->tag && head->weight < INFINITY && (ver == NULL || ver->weight < head->weight)) {
-            ver = head;
+pdijkstra RunDijkstra(pnode open, int src) 
+{
+    pdijkstra head = NULL;
+    pdijkstra *n = &head;
+
+    while (open != NULL) 
+    {
+        (*n) = (pdijkstra) malloc(sizeof(dijkstra));
+        if ((*n) == NULL) 
+        {
+            exit(0);
         }
-        head = head->next;
+
+        (*n)->node = open;
+        if (open->id == src)
+        {
+            (*n)->weight = 0;
+        } 
+        else 
+        {
+            (*n)->weight = INFINITY;
+        }
+        (*n)->tag = 0;
+        (*n)->next = NULL;
+        n = &((*n)->next);
+        open = open->next;
     }
-    if (ver != NULL) {
-        ver->tag = 1;
-    }
-    return ver;
+    return head;
 }
 
-int shortsPath(pnode head, int src, int dest) {
-    pdijkstra dijkstraHead = buildDijkstra(head, src);
-    pdijkstra u = minVertical(dijkstraHead);
-    while (u != NULL) {
-        pedge edgeIndex = u->node->edges;
-        while (edgeIndex != NULL) {
-            //relax
-            pdijkstra v = getPdijkstra(dijkstraHead, edgeIndex->endpoint->id);
-            int newD = u->weight + edgeIndex->weight;
-            if (v->weight > newD) {
-                v->weight = newD;
+////////////////////SHORTEST PASH/////////////////
+int shortest_Path(pnode head, int src, int dest) 
+{
+    pdijkstra dijkstraHead = RunDijkstra(head, src);
+    pdijkstra temp = min(dijkstraHead);
+
+    while (temp != NULL) 
+    {
+        pedge E_ind = temp->node->edges;
+
+        while (E_ind != NULL) 
+        {
+            pdijkstra n = use_Dijkstra(dijkstraHead, E_ind->endpoint->id);
+
+            int res = temp->weight + E_ind->weight;
+            if (n->weight > res)
+            {
+                n->weight = res;
             }
-            edgeIndex = edgeIndex->next;
+            E_ind = E_ind->next;
         }
-        u = minVertical(dijkstraHead);
+        temp = min(dijkstraHead);
     }
-    int D = getPdijkstra(dijkstraHead, dest)->weight;
-    if (D == INFINITY) {
+    int D = use_Dijkstra(dijkstraHead, dest)->weight;
+
+    if (D == INFINITY)
+    {
         D = -1;
     }
-    deletateDijkstra(dijkstraHead);
+    del_Dijk(dijkstraHead);
+
     return D;
 }
 
 /////////////////TSP////////////////
 
-void deep_copy(int* fromArr,int* toArr, int arrLenght) {
-    for (int i = 0; i < arrLenght; ++i) {
+void input_Array(int* fromArr,int* toArr, int arrLenght) 
+{
+    for (int i = 0; i < arrLenght; ++i) 
+    {
         toArr[i] = fromArr[i];
     }
 }
 
-void swap(int* arr, int i, int j){
+void swap(int* arr, int i, int j)
+{
     int temp = arr[i];
     arr[i]= arr[j];
     arr[j] = temp;
 }
 
-void PermotitionOfArr(int* arr, int arrLength){
+void PermotitionOfArr(int* arr, int arrLength)
+{
     int tempWeight = 0;
     for (int i = 0; i < arrLength-1; ++i) {
-        int D = shortsPath(graph,arr[i], arr[i+1]);
+        int D = shortest_Path(graph,arr[i], arr[i+1]);
         if (D == -1){
             tempWeight = INFINITY;
             return;
@@ -121,7 +153,7 @@ void permotion( int start ,int* arr, int arrLength){
     }
     for (int i = start; i < arrLength; ++i) {
         int* arrCopy = (int*)(calloc(arrLength, sizeof(int)));
-        deep_copy(arr,arrCopy,arrLength);
+        input_Array(arr,arrCopy,arrLength);
         swap(arrCopy,start, i);
         permotion(start + 1, arrCopy, arrLength);
         free(arrCopy);
@@ -138,7 +170,7 @@ int TSP(pnode head){
         scanf("%d", &arr[i]);
     }
     int *arrCopy = (int *) (calloc(arrlenth, sizeof(int)));
-    deep_copy(arr,arrCopy,arrlenth);
+    input_Array(arr,arrCopy,arrlenth);
     permotion(0,arrCopy,arrlenth);
     free(arr);
     free(arrCopy);

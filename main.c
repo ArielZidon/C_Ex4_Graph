@@ -54,10 +54,9 @@ int main()
         }
         if(choise == 'S')
         {
-            // shortsPath(*head);
             int src = -1, dest = -1;
             scanf("%d %d", &src, &dest);
-            int dis = shortsPath(*head, src, dest);
+            int dis = shortest_Path(*head, src, dest);
             printf("Dijsktra shortest path: %d\n",dis);
             continue;
         }

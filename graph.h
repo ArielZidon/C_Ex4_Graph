@@ -45,7 +45,7 @@ void add_node(pnode *head);
 
 void del_edge(pnode *head,int n);
 
-int shortsPath(pnode head,int src,int dest);
+int shortest_Path(pnode head,int src,int dest);
 
 int TSP(pnode head);
  
