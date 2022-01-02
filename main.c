@@ -11,7 +11,7 @@ int main()
     char ch;
     int v = 0;
     int src = 0;
-    int press_A = 0;
+    // int press_A = 0;
 
     while (scanf("%c", &choise) != EOF)
     {
