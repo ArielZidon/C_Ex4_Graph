@@ -10,10 +10,10 @@ main.o: main.c graph.h
 	$(CC) $(FLAGS) -c main.c 
 
 Dijkstra.o: Dijkstra.c graph.h
-	$(CC) $(FLAGS) Dijkstra.c
+	$(CC) $(FLAGS) -c Dijkstra.c
 
 graph.o: graph.c graph.h
-	$(CC) $(FLAGS) graph.c
+	$(CC) $(FLAGS) -c graph.c
 
 graphlib.a: Dijkstra.o graph.o
 	$(AR) -rcs graphlib.a Dijkstra.o graph.o
