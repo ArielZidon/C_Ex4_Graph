@@ -172,7 +172,7 @@ int TSP(pnode head)
     graph = head;
     scanf("%d", &arrlenth);
     int *arr = (int *) (calloc(arrlenth, sizeof(int)));
-    
+
     for (int i = 0; i < arrlenth; i++) {
         scanf("%d", &arr[i]);
     }
